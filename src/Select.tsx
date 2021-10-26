@@ -19,7 +19,7 @@ export const Select = (props: SelectType) => {
         setHoveredElementvalue(props.value)
     },[props.value])
     const selectItem = props.items.find(i => i.value === props.value)
-    const hoveredItem = props.items.find(i => i.value === hoveredElementValue)
+   // const hoveredItem = props.items.find(i => i.value === hoveredElementValue)
     const ItemClicked = (value: any) => props.setValue(value)
     const showItems = () => setActive(!active)
 
@@ -28,11 +28,11 @@ export const Select = (props: SelectType) => {
 
             for (let i = 0; props.items.length; i++) {
                 if (props.items[i].value === hoveredElementValue) {
-                    const pretindent = (e.key=== 'ArrowDown'? props.items[i + 1].value:props.items[i - 1].value)
+                    const pretindent = e.key=== 'ArrowDown'? props.items[i + 1]:props.items[i - 1]
                     if (pretindent) {
-                        ItemClicked(pretindent)
-                        break
+                        ItemClicked(pretindent.value)
                     }
+                    break
                 }
             }
         }
