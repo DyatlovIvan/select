@@ -1,26 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import {Title} from './title';
+import {Body} from "./body";
+import {Select} from "./Select";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export type stateType = {
+    title: string
+    item: Array<string>
+    collapsed: boolean
 }
 
-export default App;
+export function App() {
+    // const [state, setState] = useState<stateType>(
+    //     {
+    //         title: 'name',
+    //         item: ['John', 'Nick','Peter'],
+    //         collapsed: true
+    //     }
+    // )
+    //
+    // const collapsedHandler = (collapsed: boolean) => {
+    //     setState({...state, collapsed: collapsed})
+    // }
+    // const callback = (item: string, collapsed: boolean) => {
+    //     setState({...state, title: item, collapsed: collapsed})
+    //
+    // }
+    const [value, setValue] = useState('2')
+
+    return (
+        <div className="App">
+            {/*<Title title={state.title}*/}
+            {/*       collapsed={state.collapsed}*/}
+            {/*       collapsedHandler={collapsedHandler}/>*/}
+
+            {/*{!state.collapsed && <Body item={state.item}*/}
+            {/*                           callback={callback}*/}
+            {/*                           collapsed={state.collapsed}/>}*/}
+
+            <Select value={value}
+                    setValue = {setValue}
+                    items={[
+                        {value: '1', title: 'Moscow'},
+                        {value: '2', title: 'Minsk'},
+                        {value: '3', title: 'Izhevsk'}
+                    ]}/>
+        </div>
+    );
+}
+
+
+
+
