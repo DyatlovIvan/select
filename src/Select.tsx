@@ -1,5 +1,5 @@
 import s from './/Select.module.css'
-import {KeyboardEvent, useEffect, useState} from "react";
+import React, {KeyboardEvent, useEffect, useState} from "react";
 
 type SelectType = {
     value?: any
@@ -10,8 +10,12 @@ type SelectType = {
 export type ItemType = {
     value: any
     title: string
+    country:string
 }
-export const Select = (props: SelectType) => {
+
+
+export const SelectMemo = (props: SelectType) => {
+    const [counter,setCounter] = useState(1)
     const [active, setActive] = useState(false)
     const [hoveredElementValue, setHoveredElementvalue] = useState(props.value)
 
@@ -20,7 +24,9 @@ export const Select = (props: SelectType) => {
     },[props.value])
     const selectItem = props.items.find(i => i.value === props.value)
    // const hoveredItem = props.items.find(i => i.value === hoveredElementValue)
-    const ItemClicked = (value: any) => props.setValue(value)
+    const ItemClicked = (value: any) => {
+        props.setValue(value)
+    }
     const showItems = () => setActive(!active)
 
     const onKeyUp = (e: KeyboardEvent<HTMLDivElement>) => {
@@ -40,6 +46,7 @@ export const Select = (props: SelectType) => {
     }
     return (
         <div className={s.select} tabIndex={0} onKeyUp={onKeyUp}>
+            {counter}
             <span className={s.main} onClick={showItems}>{selectItem && selectItem.title}</span>
             {
                 active &&
@@ -57,3 +64,5 @@ export const Select = (props: SelectType) => {
         </div>
     )
 }
+
+export let Select = React.memo(SelectMemo)

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import './App.css';
 import {Title} from './title';
 import {Body} from "./body";
@@ -27,7 +27,20 @@ export function App() {
     //
     // }
     const [value, setValue] = useState('2')
+    const Array = [
+        {value: '1', title: 'Moscow', country:'Russia'},
+        {value: '2', title: 'Minsk', country:'Belarus'},
+        {value: '3', title: 'Izhevsk', country:'Russia'},
+        {value: '4', title: 'Kiev', country:'Uraine'},
+        {value: '5', title: 'St. Peterburg', country:'Russia'},
+        {value: '6', title: 'Samara', country:'Russia'},
+        {value: '7', title: 'Keninsburg', country:'Russia'}
+    ]
 
+    const UseMemoArray = useMemo(()=>{
+        return Array.filter(el=>el.country==='Russia')
+
+    },[Array])
     return (
         <div className="App">
             {/*<Title title={state.title}*/}
@@ -40,11 +53,10 @@ export function App() {
 
             <Select value={value}
                     setValue = {setValue}
-                    items={[
-                        {value: '1', title: 'Moscow'},
-                        {value: '2', title: 'Minsk'},
-                        {value: '3', title: 'Izhevsk'}
-                    ]}/>
+                    items={UseMemoArray}/>
+            <Select value={value}
+                    setValue = {setValue}
+                    items={Array}/>
         </div>
     );
 }
